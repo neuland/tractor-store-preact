@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=21.0.0"
+  },
   "scripts": {
     "start:integration": "cd ./integration && npm run start",
     "start:explore": "cd ./explore && npm run start",
