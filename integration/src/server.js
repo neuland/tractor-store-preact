@@ -4,11 +4,17 @@ import {
   responseInterceptor,
 } from "http-proxy-middleware";
 import ESI from "nodesi";
+import dotenv from "dotenv";
+dotenv.config({ path: "../.env" });
+
+const { EXPLORE_URL, DECIDE_URL, CHECKOUT_URL } = process.env;
 
 const app = express();
 
 const proxyTable = {
-  "/explore/": "http://localhost:3001",
+  "/explore": EXPLORE_URL,
+  "/decide": DECIDE_URL,
+  "/checkout": CHECKOUT_URL,
 };
 
 const esi = new ESI({
@@ -26,7 +32,7 @@ for (const path in proxyTable) {
     path,
     createProxyMiddleware({
       target: proxyTable[path],
-      changeOrigin: true, // for vhosted sites
+      changeOrigin: true,
       pathRewrite: (path, req) => req.originalUrl,
       selfHandleResponse: true,
       on: {

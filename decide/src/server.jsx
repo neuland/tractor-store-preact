@@ -26,14 +26,14 @@ export default function createApp(beforeRoutes = (app) => {}) {
   }
 
   // API endpoint
-  app.get("/explore/api/about", (c) => c.json(aboutData));
-  app.get("/explore/api/navigation", (c) => {
+  app.get("/decide/api/about", (c) => c.json(aboutData));
+  app.get("/decide/api/navigation", (c) => {
     const min = parseInt(c.req.query("min"), 10);
     const max = parseInt(c.req.query("max"), 10);
     return c.json({ avg: (min + max) / 2 });
   });
 
-  app.get("/explore/esi/navigation", async (c) => {
+  app.get("/decide/esi/navigation", async (c) => {
     const params = {
       min: parseInt(c.req.query("min"), 10),
       max: parseInt(c.req.query("max"), 10),
@@ -51,7 +51,7 @@ export default function createApp(beforeRoutes = (app) => {}) {
   });
 
   // Universal routing and rendering
-  app.get("/explore/:page?", async (c) => {
+  app.get("/decide/:page?", async (c) => {
     const data = await fetchPageData(c.req.param("page"));
     const jsx = <App data={data} path={c.req.path} />;
     const rendered = renderToString(jsx);
@@ -61,12 +61,12 @@ export default function createApp(beforeRoutes = (app) => {}) {
     <html>
     <head>
       <title>Preact SSR</title>
-      <link rel="stylesheet" href="/explore/static/client.css">
+      <link rel="stylesheet" href="/decide/static/client.css">
     </head>
     <body>
       <div id="app">${rendered}</div>
       <script type="application/json" data-state>${state}</script>
-      <script src="/explore/static/client.js"></script>
+      <script src="/decide/static/client.js"></script>
     </body>
     </html>
   `);

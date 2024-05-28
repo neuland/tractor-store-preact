@@ -8,22 +8,26 @@ const App = ({ path, data }) => {
   return (
     <div>
       <nav>
-        <Link href="/explore">Home</Link>
-        <Link href="/explore/about">About</Link>
-        <Link href="/explore/stores">Stores</Link>
+        <Link href="/decide">Home</Link>
+        <Link href="/decide/about">About</Link>
+        <Link href="/decide/stores">Stores</Link>
       </nav>
       <Router url={path}>
-        <div path="/explore">
-          <h1>Explore Home</h1>
+        <div path="/decide">
+          <h1>Decide Home</h1>
         </div>
-        <About path="/explore/about" {...data} />
-        <Stores path="/explore/stores" {...data} />
+        <About path="/decide/about" {...data} />
+        <Stores path="/decide/stores" {...data} />
         <div default>
           <h1>404 Not Found {path}</h1>
         </div>
       </Router>
-      <a href="/decide" data-native>
-        Decide »
+      <a href="/explore" data-native>
+        « Explore
+      </a>
+      <br />
+      <a href="/checkout" data-native>
+        Checkout »
       </a>
     </div>
   );

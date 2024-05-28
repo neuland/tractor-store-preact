@@ -1,8 +1,8 @@
 const isServer = typeof window === "undefined";
 
 const api = async (path, opts = {}) => {
-  const prefix = isServer ? process.env.EXPLORE_URL : "";
-  let url = `${prefix}/explore/api${path}`;
+  const prefix = isServer ? process.env.DECIDE_URL : "";
+  let url = `${prefix}/decide/api${path}`;
   if (opts.query) {
     url += `?${new URLSearchParams(opts.query).toString()}`;
   }

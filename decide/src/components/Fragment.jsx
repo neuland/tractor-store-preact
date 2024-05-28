@@ -4,7 +4,7 @@ const isServer = typeof window === "undefined";
 
 const esiPrefix = (team) => {
   const urls = {
-    explore: process.env.EXPLORE_URL,
+    decide: process.env.DECIDE_URL,
   };
   return `${urls[team]}/${team}/fragment`;
 };
