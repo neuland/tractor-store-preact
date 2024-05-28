@@ -1,0 +1,19 @@
+{
+  "name": "tractor-store-preact",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:integration": "cd ./integration && npm run start",
+    "prod:integration": "cd ./integration && npm run prod",
+    "start:explore": "cd ./explore && npm run start",
+    "prod:explore": "cd ./explore && npm run prod",
+    "start": "concurrently -c dim,magenta npm:start:*",
+    "prod": " concurrently -c dim,magenta npm:prod:*"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
