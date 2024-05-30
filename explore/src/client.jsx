@@ -1,6 +1,7 @@
 import { h, hydrate } from "preact";
 import register from "preact-custom-element";
 import HeaderCe from "./fragments/HeaderCe";
+import FooterCe from "./fragments/FooterCe";
 import App from "./App";
 
 // client-side hydration on page level
@@ -30,6 +31,7 @@ window.addEventListener(
 
 // client-side hydration on fragment level
 register(HeaderCe, "explore-header", null, { shadow: true });
+register(FooterCe, "explore-footer", null, { shadow: true });
 hydrateApp();
 
 console.log("explore client loaded");

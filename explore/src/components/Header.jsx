@@ -6,27 +6,25 @@ import c from "./Header.module.css";
 
 export default () => {
   return (
-    <div>
+    <header class={c.header} data-boundary="explore-header">
       <link rel="stylesheet" href="/explore/static/client.css" />
-      <header class={c.header} data-boundary="explore-header">
-        <div class={c.cutter}>
-          <div class={c.inner}>
-            <a class={c.link} href="/">
-              <img
-                class={c.logo}
-                src={`${IMAGE_SERVER}/cdn/img/logo.svg`}
-                alt="Micro Frontends - Tractor Store"
-              />
-            </a>
-            <div class={c.navigation}>
-              <Navigation />
-            </div>
-            <div class={c.cart}>
-              <Fragment team="checkout" name="minicart" />
-            </div>
+      <div class={c.cutter}>
+        <div class={c.inner}>
+          <a class={c.link} href="/">
+            <img
+              class={c.logo}
+              src={`${IMAGE_SERVER}/cdn/img/logo.svg`}
+              alt="Micro Frontends - Tractor Store"
+            />
+          </a>
+          <div class={c.navigation}>
+            <Navigation />
+          </div>
+          <div class={c.cart}>
+            <Fragment team="checkout" name="minicart" />
           </div>
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 };

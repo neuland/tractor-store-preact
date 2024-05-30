@@ -5,6 +5,7 @@ import { renderToString } from "preact-render-to-string";
 import App from "./App";
 import { fetchPageData, fetchFragmentData } from "./fetchData";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import data from "./database";
 import dotenv from "dotenv";
 dotenv.config({ path: "../.env" });
@@ -75,13 +76,21 @@ export default function createApp(beforeRoutes = (app) => {}) {
 
   app.get("/explore/esi/header", async (c) => {
     const rendered = renderToString(<Header />);
-    const html = `
-      <template shadowrootmode="open">
-        ${rendered}
-      </template>
-   `;
-    return c.html(html);
+    return c.html(fragmentHtml(rendered));
   });
+
+  app.get("/explore/esi/footer", async (c) => {
+    const rendered = renderToString(<Footer />);
+    return c.html(fragmentHtml(rendered));
+  });
+
+  function fragmentHtml(rendered, state = {}) {
+    const json = JSON.stringify(state);
+    return `
+      <template shadowrootmode="open">${rendered}</template>
+      <script type="application/json" data-state>${json}</script>
+    `;
+  }
 
   function pageHtml(rendered, state) {
     return html`
