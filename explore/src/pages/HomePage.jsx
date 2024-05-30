@@ -3,7 +3,7 @@ import Fragment from "../components/Fragment";
 import { src, srcset } from "../utils.js";
 import c from "./HomePage.module.css";
 
-const HomePage = ({ teasers = [], recommendationSkus = [] }) => {
+const HomePage = ({ teasers = [] }) => {
   return (
     <main class={c.page}>
       {teasers.map(({ title, image, url }) => (
@@ -21,7 +21,7 @@ const HomePage = ({ teasers = [], recommendationSkus = [] }) => {
         <Fragment
           team="explore"
           name="recommendations"
-          skus={recommendationSkus.join(",")}
+          skus="CL-06-MT,AU-02-OG"
         />
       </div>
     </main>

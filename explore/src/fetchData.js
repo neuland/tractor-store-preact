@@ -20,7 +20,7 @@ export async function fetchPageData(page, query) {
 }
 
 export async function fetchFragmentData(name, query) {
-  if (name === "navigation") {
-    return api("/navigation", { query });
+  if (name === "recommendations") {
+    return api("/recommendations", { query });
   }
 }

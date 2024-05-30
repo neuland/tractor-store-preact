@@ -1,22 +1,24 @@
-import { Hono } from "hono";
 import { h } from "preact";
-import { html } from "./utils";
+import { Hono } from "hono";
+import dotenv from "dotenv";
 import { renderToString } from "preact-render-to-string";
 import App from "./App";
 import { fetchPageData, fetchFragmentData } from "./fetchData";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import data from "./database";
-import dotenv from "dotenv";
+import Recommendations from "./components/Recommendations";
+import { html } from "./utils";
+import {
+  homeTeasers,
+  recosForSkus,
+  categoryTitle,
+  categoryFilter,
+  categoryProducs,
+} from "./service";
 dotenv.config({ path: "../.env" });
 
 export default function createApp(beforeRoutes = (app) => {}) {
   const app = new Hono();
-
-  const aboutData = {
-    title: "About Us!",
-    content: "This is the about page content, served from an API endpoint.",
-  };
 
   // request logging
   app.use((c, next) => {
@@ -24,64 +26,43 @@ export default function createApp(beforeRoutes = (app) => {}) {
     return next();
   });
 
-  if (beforeRoutes) {
-    beforeRoutes(app);
-  }
+  if (beforeRoutes) beforeRoutes(app);
 
-  // API endpoint
-  app.get("/explore/api/about", (c) => c.json(aboutData));
-  app.get("/explore/api/home", (c) =>
-    c.json({
-      teasers: [
-        {
-          title: "Classic Tractors",
-          image: "/cdn/img/scene/[size]/classics.webp",
-          url: "/products/classic",
-        },
-        {
-          title: "Autonomous Tractors",
-          image: "/cdn/img/scene/[size]/autonomous.webp",
-          url: "/products/autonomous",
-        },
-      ],
-      recommendationSkus: ["CL-01-GY", "AU-07-MT"],
-    })
-  );
+  /**
+   * API endpoints
+   */
+  app.get("/explore/api/home", (c) => c.json({ teasers: homeTeasers() }));
   app.get("/explore/api/category", (c) => {
     const filter = c.req.query("filter");
-
-    const cat = filter && data.categories.find((c) => c.key === filter);
-
-    const title = cat ? cat.name : "All Machines";
-    const products = cat
-      ? cat.products
-      : data.categories.flatMap((c) => c.products);
-    // sort products by price descending
-    products.sort((a, b) => b.startPrice - a.startPrice);
-    const filters = [
-      { url: "/products", name: "All", active: !cat },
-      ...data.categories.map((c) => ({
-        url: `/products/${c.key}`,
-        name: c.name,
-        active: c.key === filter,
-      })),
-    ];
-
-    return c.json({ title, products, filters });
+    return c.json({
+      title: categoryTitle(filter),
+      products: categoryProducs(filter),
+      filters: categoryFilter(filter),
+    });
   });
+  app.get("/explore/api/stores", (c) => c.json({ stores: stores() }));
+  app.get("/explore/api/recommendations", (c) =>
+    c.json({
+      recommendations: recosForSkus(c.req.query("skus").split(",")),
+    })
+  );
 
-  app.get("/explore/api/stores", (c) => {
-    return c.json({ stores: data.stores });
-  });
-
+  /**
+   * ESI fragments
+   */
   app.get("/explore/esi/header", async (c) => {
     const rendered = renderToString(<Header />);
     return c.html(fragmentHtml(rendered));
   });
-
   app.get("/explore/esi/footer", async (c) => {
     const rendered = renderToString(<Footer />);
     return c.html(fragmentHtml(rendered));
+  });
+  app.get("/explore/esi/recommendations", async (c) => {
+    const skus = c.req.query("skus");
+    const data = await fetchFragmentData("recommendations", { skus });
+    const rendered = renderToString(<Recommendations {...data} />);
+    return c.html(fragmentHtml(rendered, data));
   });
 
   function fragmentHtml(rendered, state = {}) {
@@ -92,30 +73,9 @@ export default function createApp(beforeRoutes = (app) => {}) {
     `;
   }
 
-  function pageHtml(rendered, state) {
-    return html`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>Tractor Store</title>
-          <link rel="stylesheet" href="/explore/static/client.css" />
-          <link rel="stylesheet" href="/decide/static/client.css" />
-          <link rel="stylesheet" href="/checkout/static/client.css" />
-        </head>
-        <body data-boundary="explore-page">
-          <div id="explore-app">${rendered}</div>
-          <script type="application/json" data-state>
-            ${state}
-          </script>
-          <script src="/explore/static/client.js" type="module"></script>
-          <script src="/decide/static/client.js" type="module"></script>
-          <script src="/checkout/static/client.js" type="module"></script>
-          <script src="/cdn/js/helper.js" type="module"></script>
-        </body>
-      </html>
-    `;
-  }
-
+  /**
+   * Pages
+   */
   app.get("/", async (c) => {
     const data = await fetchPageData("home");
     const jsx = <App data={data} path={c.req.path} />;
@@ -140,13 +100,8 @@ export default function createApp(beforeRoutes = (app) => {}) {
     return c.html(pageHtml(rendered, state));
   });
 
-  // Universal routing and rendering
-  app.get("/explore/:page?", async (c) => {
-    const data = await fetchPageData(c.req.param("page") || "home");
-    const jsx = <App data={data} path={c.req.path} />;
-    const rendered = renderToString(jsx);
-    const state = JSON.stringify(data || {});
-    return c.html(html`
+  function pageHtml(rendered, state) {
+    return html`
       <!DOCTYPE html>
       <html>
         <head>
@@ -156,7 +111,7 @@ export default function createApp(beforeRoutes = (app) => {}) {
           <link rel="stylesheet" href="/checkout/static/client.css" />
         </head>
         <body data-boundary="explore-page">
-          <div id="app">${rendered}</div>
+          <div id="explore-app">${rendered}</div>
           <script type="application/json" data-state>
             ${state}
           </script>
@@ -166,8 +121,8 @@ export default function createApp(beforeRoutes = (app) => {}) {
           <script src="/cdn/js/helper.js" type="module"></script>
         </body>
       </html>
-    `);
-  });
+    `;
+  }
 
   return app;
 }
