@@ -5,9 +5,11 @@ import App from "./App";
 
 // client-side hydration on page level
 window.onload = () => {
-  const $app = document.getElementById("app");
-  const state = JSON.parse($app.nextElementSibling.textContent || "{}");
-  hydrate(<App data={state} />, $app);
+  const $app = document.getElementById("checkout-app");
+  if ($app) {
+    const state = JSON.parse($app.nextElementSibling.textContent || "{}");
+    hydrate(<App data={state} />, $app);
+  }
 };
 
 // hook into preact-custom-elements initialization and provide state from DOM to custom elements

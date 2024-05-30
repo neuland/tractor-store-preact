@@ -6,7 +6,7 @@ const esiPrefix = (team) => {
   const urls = {
     explore: process.env.EXPLORE_URL,
   };
-  return `${urls[team]}/${team}/fragment`;
+  return `${urls[team]}/${team}/esi`;
 };
 
 const Fragment = ({ team, name, ...props }) => {

@@ -31,8 +31,12 @@ const buildBoth = async (watch = false, minify = false) => {
     ...options,
   };
 
-  await esbuild.build(clientOptions);
-  await esbuild.build(serverOptions);
+  try {
+    await esbuild.build(clientOptions);
+    await esbuild.build(serverOptions);
+  } catch (e) {
+    console.log("initial build failed", e);
+  }
 
   if (watch) {
     const client = await esbuild.context(clientOptions);

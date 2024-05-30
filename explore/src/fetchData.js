@@ -10,8 +10,12 @@ const api = async (path, opts = {}) => {
 };
 
 export async function fetchPageData(page, query) {
-  if (page === "about") {
-    return api("/about", { query });
+  if (page === "stores") {
+    return api("/stores", { query });
+  } else if (page === "home") {
+    return api("/home");
+  } else if (page === "category") {
+    return api("/category", { query });
   }
 }
 

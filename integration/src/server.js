@@ -15,14 +15,12 @@ const proxyTable = {
   "/explore": EXPLORE_URL,
   "/decide": DECIDE_URL,
   "/checkout": CHECKOUT_URL,
+  "/": EXPLORE_URL, // home page
+  "/products": EXPLORE_URL, // category page
+  "/stores": EXPLORE_URL, // stores page
 };
 
 const esi = new ESI({
-  allowedHosts: Object.values(proxyTable),
-  logTo: console.log,
-});
-
-console.log({
   allowedHosts: Object.values(proxyTable),
   logTo: console.log,
 });

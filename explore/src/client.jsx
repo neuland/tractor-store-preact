@@ -1,14 +1,16 @@
 import { h, hydrate } from "preact";
 import register from "preact-custom-element";
-import NavigationCe from "./fragments/NavigationCe";
+import HeaderCe from "./fragments/HeaderCe";
 import App from "./App";
 
 // client-side hydration on page level
-window.onload = () => {
-  const $app = document.getElementById("app");
-  const state = JSON.parse($app.nextElementSibling.textContent || "{}");
-  hydrate(<App data={state} />, $app);
-};
+function hydrateApp() {
+  const $app = document.getElementById("explore-app");
+  if ($app) {
+    const state = JSON.parse($app.nextElementSibling.textContent || "{}");
+    hydrate(<App data={state} />, $app);
+  }
+}
 
 // hook into preact-custom-elements initialization and provide state from DOM to custom elements
 window.addEventListener(
@@ -27,4 +29,7 @@ window.addEventListener(
 );
 
 // client-side hydration on fragment level
-register(NavigationCe, "explore-navigation", null, { shadow: true });
+register(HeaderCe, "explore-header", null, { shadow: true });
+hydrateApp();
+
+console.log("explore client loaded");

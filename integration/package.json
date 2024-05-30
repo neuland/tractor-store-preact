@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node --watch src/server.js",
+    "prod": "node src/server.js"
   },
   "type": "module",
   "author": "",

@@ -1,12 +1,17 @@
 import { h } from "preact";
+import c from "./Navigation.module.css";
 
-const Navigation = ({ avg }) => {
+const Navigation = () => {
   return (
-    <nav>
-      <a href="/explore/about">About</a>
-      <a href="/explore/contact">Contact</a>
-      <a href="/explore/faq">FAQ</a>
-      <p>Average: {avg}</p>
+    <nav class={c.navigation}>
+      <ul class={c.list}>
+        <li class={c.item}>
+          <a href="/products">Machines</a>
+        </li>
+        <li class={c.item}>
+          <a href="/stores">Stores</a>
+        </li>
+      </ul>
     </nav>
   );
 };
