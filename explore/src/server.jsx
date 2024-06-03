@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Recommendations from "./components/Recommendations";
 import { html } from "./utils";
 import {
+  stores,
   homeTeasers,
   recosForSkus,
   categoryTitle,

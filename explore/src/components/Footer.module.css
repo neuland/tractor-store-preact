@@ -98,12 +98,18 @@
 }
 
 .initiative {
-  grid-area: initiave;
   display: flex;
   gap: 1rem;
   align-items: flex-start;
   flex: 1;
   margin-bottom: 2rem;
+}
+
+.initiative,
+.credits {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 50%;
 }
 
 .initiative img {
@@ -113,10 +119,6 @@
 
 .initiative p {
   margin: 0;
-}
-
-.credits {
-  grid-area: credits;
 }
 
 .credits h4 {
