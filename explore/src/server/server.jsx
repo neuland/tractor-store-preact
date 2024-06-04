@@ -2,12 +2,12 @@ import { h } from "preact";
 import { Hono } from "hono";
 import dotenv from "dotenv";
 import { renderToString } from "preact-render-to-string";
-import App from "./App";
-import { fetchPageData, fetchFragmentData } from "./fetchData";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Recommendations from "./components/Recommendations";
-import { html } from "./utils";
+import App from "../App";
+import fetchData from "../fetchData";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Recommendations from "../components/Recommendations";
+import { html } from "../utils";
 import {
   stores,
   homeTeasers,
@@ -16,6 +16,9 @@ import {
   categoryFilter,
   categoryProducs,
 } from "./service";
+import HomePage from "../pages/HomePage";
+import CategoryPage from "../pages/CategoryPage";
+import StoresPage from "../pages/StoresPage";
 dotenv.config({ path: "../.env" });
 
 export default function createApp(beforeRoutes = (app) => {}) {
@@ -23,7 +26,7 @@ export default function createApp(beforeRoutes = (app) => {}) {
 
   // request logging
   app.use((c, next) => {
-    console.log(c.req.method, c.req.path);
+    console.log(c.req.method, c.req.path, c.req.query());
     return next();
   });
 
@@ -43,28 +46,27 @@ export default function createApp(beforeRoutes = (app) => {}) {
   });
   app.get("/explore/api/stores", (c) => c.json({ stores: stores() }));
   app.get("/explore/api/recommendations", (c) =>
-    c.json({
-      recommendations: recosForSkus(c.req.query("skus").split(",")),
-    })
+    c.json({ recommendations: recosForSkus(c.req.query("skus")) })
   );
 
   /**
    * ESI fragments
    */
-  app.get("/explore/esi/header", async (c) => {
-    const rendered = renderToString(<Header />);
-    return c.html(fragmentHtml(rendered));
-  });
-  app.get("/explore/esi/footer", async (c) => {
-    const rendered = renderToString(<Footer />);
-    return c.html(fragmentHtml(rendered));
-  });
-  app.get("/explore/esi/recommendations", async (c) => {
-    const skus = c.req.query("skus");
-    const data = await fetchFragmentData("recommendations", { skus });
-    const rendered = renderToString(<Recommendations {...data} />);
+  app.get("/explore/esi/header", async (c) => await renderFragment(Header, c));
+  app.get("/explore/esi/footer", async (c) => await renderFragment(Footer, c));
+  app.get(
+    "/explore/esi/recommendations",
+    async (c) => await renderFragment(Recommendations, c)
+  );
+
+  async function renderFragment(Component, c) {
+    let data = {};
+    if (Component.api) {
+      data = await fetchData(Component.api, c.req.query());
+    }
+    const rendered = renderToString(<Component {...data} />);
     return c.html(fragmentHtml(rendered, data));
-  });
+  }
 
   function fragmentHtml(rendered, state = {}) {
     const json = JSON.stringify(state);
@@ -78,28 +80,24 @@ export default function createApp(beforeRoutes = (app) => {}) {
    * Pages
    */
   app.get("/", async (c) => {
-    const data = await fetchPageData("home");
-    const jsx = <App data={data} path={c.req.path} />;
-    const rendered = renderToString(jsx);
-    const state = JSON.stringify(data || {});
-    return c.html(pageHtml(rendered, state));
+    return await renderPage(HomePage.api, {}, c);
   });
 
   app.get("/products/:filter?", async (c) => {
-    const data = await fetchPageData("category", c.req.param());
-    const jsx = <App data={data} path={c.req.path} />;
-    const rendered = renderToString(jsx);
-    const state = JSON.stringify(data || {});
-    return c.html(pageHtml(rendered, state));
+    return await renderPage(CategoryPage.api, c.req.param(), c);
   });
 
   app.get("/stores", async (c) => {
-    const data = await fetchPageData("stores");
+    return await renderPage(StoresPage.api, {}, c);
+  });
+
+  async function renderPage(api, params = {}, c) {
+    const data = await fetchData(api, params);
     const jsx = <App data={data} path={c.req.path} />;
     const rendered = renderToString(jsx);
     const state = JSON.stringify(data || {});
     return c.html(pageHtml(rendered, state));
-  });
+  }
 
   function pageHtml(rendered, state) {
     return html`

@@ -1,7 +1,7 @@
 import { h } from "preact";
 import Recommendations from "../components/Recommendations";
 import { useEffect, useState, useRef } from "preact/hooks";
-import { fetchFragmentData } from "../fetchData";
+import fetchData from "../fetchData";
 
 const RecommendationsCe = ({ skus }, initialState) => {
   const [state, setState] = useState(initialState);
@@ -13,7 +13,7 @@ const RecommendationsCe = ({ skus }, initialState) => {
       return;
     }
     if (!skus) return;
-    const data = await fetchFragmentData("recommendations", { skus });
+    const data = await fetchData(Recommendations.api, { skus });
     setState(data);
   }, [skus]);
 

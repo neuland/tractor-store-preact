@@ -24,7 +24,6 @@ const NavigationCe = ({ min, max }, initialState) => {
     }
 
     const data = await fetchFragmentData("navigation", params);
-    console.log("useEffect", { data, params });
     setState(data);
   }, [params.min, params.max]);
 

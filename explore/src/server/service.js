@@ -1,4 +1,4 @@
-import data from "./database";
+import data from "../database";
 
 /**
  * Recommendations
@@ -26,8 +26,8 @@ function colorDistance(rgb1, rgb2) {
   );
 }
 
-export function recosForSkus(skus, length = 4) {
-  console.log({ skus });
+export function recosForSkus(skusString = "", length = 4) {
+  skus = skusString.split(",");
   const targetRgb = averageColor(skusToColors(skus));
   let distances = [];
 
@@ -81,18 +81,7 @@ export function categoryProducs(filter) {
  * Home Page
  */
 export function homeTeasers() {
-  return [
-    {
-      title: "Classic Tractors",
-      image: "/cdn/img/scene/[size]/classics.webp",
-      url: "/products/classic",
-    },
-    {
-      title: "Autonomous Tractors",
-      image: "/cdn/img/scene/[size]/autonomous.webp",
-      url: "/products/autonomous",
-    },
-  ];
+  return data.teaser;
 }
 
 /**

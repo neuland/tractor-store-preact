@@ -7,5 +7,5 @@ const app = createApp((app) => {
 });
 
 serve({ fetch: app.fetch, port: 3001 }, (info) => {
-  console.log(`explore http://localhost:${info.port}/explore/`);
+  console.log(`explore http://localhost:${info.port}/`);
 });

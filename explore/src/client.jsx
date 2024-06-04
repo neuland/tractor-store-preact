@@ -36,4 +36,4 @@ register(FooterCe, "explore-footer", null, { shadow: true });
 register(RecommendationsCe, "explore-recommendations", null, { shadow: true });
 hydrateApp();
 
-console.log("explore client loaded");
+console.log("explore client ready");

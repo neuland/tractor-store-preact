@@ -16,6 +16,6 @@ const StoresPage = ({ stores = [] }) => {
   );
 };
 
-StoresPage.route = "stores";
+StoresPage.api = "/stores";
 
 export default StoresPage;

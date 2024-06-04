@@ -16,6 +16,6 @@ const CategoryPage = ({ title = "", products = [], filters = [] }) => {
   );
 };
 
-CategoryPage.route = "category";
+CategoryPage.api = "/category";
 
 export default CategoryPage;

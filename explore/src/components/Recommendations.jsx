@@ -2,7 +2,7 @@ import { h } from "preact";
 import Recommendation from "./Recommendation.jsx";
 import c from "./Recommendations.module.css";
 
-export default ({ recommendations }) => {
+const Recommendations = ({ recommendations }) => {
   return recommendations.length ? (
     <div class={c.recommendations} data-boundary="explore-recommendations">
       <link rel="stylesheet" href="/explore/static/client.css" />
@@ -11,3 +11,7 @@ export default ({ recommendations }) => {
     </div>
   ) : null;
 };
+
+Recommendations.api = "/recommendations";
+
+export default Recommendations;

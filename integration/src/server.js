@@ -11,6 +11,7 @@ const { EXPLORE_URL, DECIDE_URL, CHECKOUT_URL } = process.env;
 
 const app = express();
 
+// central proxy table
 const proxyTable = {
   "/explore": EXPLORE_URL,
   "/decide": DECIDE_URL,

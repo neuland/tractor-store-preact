@@ -28,6 +28,6 @@ const HomePage = ({ teasers = [] }) => {
   );
 };
 
-HomePage.route = "home";
+HomePage.api = "/home";
 
 export default HomePage;

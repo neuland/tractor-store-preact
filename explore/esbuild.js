@@ -25,7 +25,7 @@ const buildBoth = async (watch = false, minify = false) => {
   };
 
   const serverOptions = {
-    entryPoints: ["src/server.node.js"],
+    entryPoints: ["src/server/server.node.js"],
     outfile: "dist/server.node.js",
     platform: "node",
     ...options,
