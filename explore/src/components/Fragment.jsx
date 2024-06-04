@@ -12,6 +12,7 @@ const esiPrefix = (team) => {
 const Fragment = ({ team, name, ...props }) => {
   let esi = null;
   if (isServer) {
+    delete props.onClick;
     const query = new URLSearchParams(props).toString();
     const url = `${esiPrefix(team)}/${name}?${query}`;
     esi = <esi:include src={url} />;

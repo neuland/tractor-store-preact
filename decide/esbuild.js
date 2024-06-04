@@ -17,7 +17,7 @@ const buildBoth = async (watch = false, minify = false) => {
   };
 
   const clientOptions = {
-    entryPoints: ["src/client.jsx"],
+    entryPoints: ["src/client/index.jsx"],
     outfile: "public/decide/static/client.js",
     platform: "browser",
     loader: { ".jsx": "jsx" },
@@ -25,7 +25,7 @@ const buildBoth = async (watch = false, minify = false) => {
   };
 
   const serverOptions = {
-    entryPoints: ["src/server.node.js"],
+    entryPoints: ["src/server/index.node.js"],
     outfile: "dist/server.node.js",
     platform: "node",
     ...options,

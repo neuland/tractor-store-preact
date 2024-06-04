@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { src, srcset } from "../utils.js";
+import { src, srcset, navigate } from "../utils.js";
 import c from "./Recommendation.module.css";
 
 export default ({ image, url, name }) => {

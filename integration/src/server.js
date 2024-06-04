@@ -16,14 +16,14 @@ const proxyTable = {
   "/explore": EXPLORE_URL,
   "/decide": DECIDE_URL,
   "/checkout": CHECKOUT_URL,
-  "/": EXPLORE_URL, // home page
+  "/product/": DECIDE_URL, // product page
   "/products": EXPLORE_URL, // category page
   "/stores": EXPLORE_URL, // stores page
+  "/": EXPLORE_URL, // home page
 };
 
 const esi = new ESI({
   allowedHosts: Object.values(proxyTable),
-  logTo: console.log,
 });
 
 for (const path in proxyTable) {
@@ -37,7 +37,7 @@ for (const path in proxyTable) {
       on: {
         proxyRes: responseInterceptor(
           async (responseBuffer, proxyRes, req, res) => {
-            console.log(req.path, proxyRes.headers["content-type"]);
+            //console.log(req.method, req.path);
             const body = responseBuffer.toString("utf8");
             return await esi.process(body);
           }

@@ -1,11 +1,12 @@
 import { h } from "preact";
-import { Router, Link } from "preact-router";
+import { Router } from "preact-router";
 import CategoryPage from "./pages/CategoryPage";
 import HomePage from "./pages/HomePage";
 import StoresPage from "./pages/StoresPage";
 import Fragment from "./components/Fragment";
 import fetchData from "./fetchData";
 import { useState, useCallback } from "preact/hooks";
+import { navigate } from "./utils";
 import "./styles.css";
 
 const App = ({ path, data }) => {
@@ -29,7 +30,7 @@ const App = ({ path, data }) => {
 
   return (
     <div data-boundary="explore-page">
-      <Fragment team="explore" name="header" />
+      <Fragment team="explore" name="header" onClick={navigate} />
       <Router url={path} onChange={updateData}>
         <HomePage path="/" {...state} />
         <CategoryPage path="/products/:filter?" {...state} />

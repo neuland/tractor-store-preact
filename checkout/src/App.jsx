@@ -1,34 +1,44 @@
 import { h } from "preact";
-import { Router } from "preact-router";
-import { Link } from "preact-router/match";
-import About from "./pages/About";
-import Stores from "./pages/Stores";
+import { Router, Link } from "preact-router";
+import CategoryPage from "./pages/CategoryPage";
+import HomePage from "./pages/HomePage";
+import StoresPage from "./pages/StoresPage";
+import Fragment from "./components/Fragment";
+import fetchData from "./fetchData";
+import { useState, useCallback } from "preact/hooks";
+import "./styles.css";
 
 const App = ({ path, data }) => {
+  const [state, update] = useState(data);
+  const [initial, setInitial] = useState(true);
+
+  const updateData = useCallback(
+    async (url) => {
+      // skip data fetching on initial render
+      if (initial) {
+        setInitial(false);
+        return;
+      }
+      const api = url.current.type.api;
+      const query = url.matches;
+      const newData = await fetchData(api, { query });
+      update(newData);
+    },
+    [initial]
+  );
+
   return (
-    <div>
-      <nav>
-        <Link href="/checkout">Home</Link>
-        <Link href="/checkout/about">About</Link>
-        <Link href="/checkout/stores">Stores</Link>
-      </nav>
-      <Router url={path}>
-        <div path="/checkout">
-          <h1>Checkout Home</h1>
-        </div>
-        <About path="/checkout/about" {...data} />
-        <Stores path="/checkout/stores" {...data} />
+    <div data-boundary="checkout-page">
+      <Fragment team="checkout" name="header" />
+      <Router url={path} onChange={updateData}>
+        <HomePage path="/" {...state} />
+        <CategoryPage path="/products/:filter?" {...state} />
+        <StoresPage path="/stores" {...state} />
         <div default>
           <h1>404 Not Found {path}</h1>
         </div>
       </Router>
-      <a href="/decide" data-native>
-        « Decide
-      </a>
-      <br />
-      <a href="/explore" data-native>
-        Explore ↩
-      </a>
+      <Fragment team="checkout" name="footer" />
     </div>
   );
 };

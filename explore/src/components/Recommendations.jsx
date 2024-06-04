@@ -2,7 +2,7 @@ import { h } from "preact";
 import Recommendation from "./Recommendation.jsx";
 import c from "./Recommendations.module.css";
 
-const Recommendations = ({ recommendations }) => {
+const Recommendations = ({ recommendations = [] }) => {
   return recommendations.length ? (
     <div class={c.recommendations} data-boundary="explore-recommendations">
       <link rel="stylesheet" href="/explore/static/client.css" />
