@@ -26,8 +26,7 @@ function colorDistance(rgb1, rgb2) {
   );
 }
 
-export function recosForSkus(skusString = "", length = 4) {
-  skus = skusString.split(",");
+function recosForSkus(skus = [], length = 4) {
   const targetRgb = averageColor(skusToColors(skus));
   let distances = [];
 
@@ -43,15 +42,18 @@ export function recosForSkus(skusString = "", length = 4) {
 }
 
 /**
- * Category Page
+ * Recommendations Fragment
  */
-
-function categoryByFilter(filter) {
-  return filter && data.categories.find((c) => c.key === filter);
+export function recommendationsFragmentData(skusString) {
+  return {
+    recommendations: recosForSkus(skusString.split(",")),
+  };
 }
 
-export function categoryFilter(filter) {
-  const cat = categoryByFilter(filter);
+/**
+ * Category Page
+ */
+function categoryFilter(cat, filter) {
   return [
     { url: "/products", name: "All", active: !cat },
     ...data.categories.map((c) => ({
@@ -62,13 +64,11 @@ export function categoryFilter(filter) {
   ];
 }
 
-export function categoryTitle(filter) {
-  const cat = categoryByFilter(filter);
+function categoryTitle(cat) {
   return cat ? cat.name : "All Machines";
 }
 
-export function categoryProducs(filter) {
-  const cat = categoryByFilter(filter);
+function categoryProducs(cat) {
   const products = cat
     ? cat.products
     : data.categories.flatMap((c) => c.products);
@@ -77,16 +77,31 @@ export function categoryProducs(filter) {
   return products;
 }
 
+export function categoryPageData(filter) {
+  const category = filter
+    ? data.categories.find((c) => c.key === filter)
+    : null;
+  return {
+    title: categoryTitle(category),
+    products: categoryProducs(category),
+    filters: categoryFilter(category, filter),
+  };
+}
+
 /**
  * Home Page
  */
-export function homeTeasers() {
-  return data.teaser;
+export function homePageData() {
+  return {
+    teaser: data.teaser,
+  };
 }
 
 /**
  * Stores Page
  */
-export function stores() {
-  return data.stores;
+export function storesPageData() {
+  return {
+    stores: data.stores,
+  };
 }

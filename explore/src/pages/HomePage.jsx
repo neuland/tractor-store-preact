@@ -3,10 +3,10 @@ import Fragment from "../components/Fragment";
 import { src, srcset } from "../utils.js";
 import c from "./HomePage.module.css";
 
-const HomePage = ({ teasers = [] }) => {
+const HomePage = ({ teaser = [] }) => {
   return (
     <main class={c.page}>
-      {teasers.map(({ title, image, url }) => (
+      {teaser.map(({ title, image, url }) => (
         <a class={c.categoryLink} href={url}>
           <img
             src={src(image, 500)}

@@ -9,12 +9,10 @@ import Footer from "../components/Footer";
 import Recommendations from "../components/Recommendations";
 import { html } from "../utils";
 import {
-  stores,
-  homeTeasers,
-  recosForSkus,
-  categoryTitle,
-  categoryFilter,
-  categoryProducs,
+  homePageData,
+  storesPageData,
+  categoryPageData,
+  recommendationsFragmentData,
 } from "./service";
 import HomePage from "../pages/HomePage";
 import CategoryPage from "../pages/CategoryPage";
@@ -35,18 +33,13 @@ export default function createApp(beforeRoutes = (app) => {}) {
   /**
    * API endpoints
    */
-  app.get("/explore/api/home", (c) => c.json({ teasers: homeTeasers() }));
-  app.get("/explore/api/category", (c) => {
-    const filter = c.req.query("filter");
-    return c.json({
-      title: categoryTitle(filter),
-      products: categoryProducs(filter),
-      filters: categoryFilter(filter),
-    });
-  });
-  app.get("/explore/api/stores", (c) => c.json({ stores: stores() }));
+  app.get("/explore/api/home", (c) => c.json(homePageData()));
+  app.get("/explore/api/category", (c) =>
+    c.json(categoryPageData(c.req.query("filter")))
+  );
+  app.get("/explore/api/stores", (c) => c.json(storesPageData()));
   app.get("/explore/api/recommendations", (c) =>
-    c.json({ recommendations: recosForSkus(c.req.query("skus")) })
+    c.json(recommendationsFragmentData(c.req.query("skus")))
   );
 
   /**
@@ -62,7 +55,8 @@ export default function createApp(beforeRoutes = (app) => {}) {
   async function renderFragment(Component, c) {
     let data = {};
     if (Component.api) {
-      data = await fetchData(Component.api, c.req.query());
+      const query = c.req.query();
+      data = await fetchData(Component.api, { query });
     }
     const rendered = renderToString(<Component {...data} />);
     return c.html(fragmentHtml(rendered, data));
