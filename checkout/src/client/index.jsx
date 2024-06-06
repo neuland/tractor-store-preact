@@ -17,13 +17,16 @@ function hydrateApp() {
 window.addEventListener(
   "_preact",
   (event) => {
+    console.log("hydrate", event);
     const $el = event.target;
     const tagName = $el.tagName.toLowerCase();
+    console.log("hydrate", tagName, $el);
     if (tagName.startsWith("checkout-") && $el.shadowRoot) {
       console.log("hydrate", tagName, $el, $el.shadowRoot.innerHTML);
       const $state = $el.shadowRoot.querySelector("script[data-state]");
       const state = JSON.parse($state?.textContent || "{}");
       event.detail.context = state;
+      console.log("hydrate", tagName, state, $state?.textContent);
       $el.setAttribute("hydate", true);
     }
   },

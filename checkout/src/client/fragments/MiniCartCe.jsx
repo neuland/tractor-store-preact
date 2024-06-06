@@ -22,6 +22,7 @@ const MiniCartCe = ({}, initialState) => {
 
     window.addEventListener("checkout:cart-updated", handleCartUpdated);
 
+    console.log("MiniCartCe", isInitialRender.current, state.quantity);
     if (isInitialRender.current && state.quantity) {
       isInitialRender.current = false;
     } else {

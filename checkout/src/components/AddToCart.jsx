@@ -7,6 +7,7 @@ const AddToCart = ({
   sku,
   outOfStock,
   variant = {},
+  confirmed,
   handleSubmit = () => {},
 }) => {
   return (
@@ -21,18 +22,16 @@ const AddToCart = ({
       <input type="hidden" name="sku" value={sku} />
       <div class={c.information}>
         <p>{fmtprice(variant.price)}</p>
-        {outOfStock ? (
-          <p class={[c.stock, c["stock--empty"]].join(" ")}>out of stock</p>
-        ) : (
-          <p class={[c.stock, c["stock--ok"]].join(" ")}>
-            {variant.inventory} in stock, free shipping
-          </p>
-        )}
+        <p class={[c.stock, outOfStock ? c.stockEmpty : c.stockOk].join(" ")}>
+          {outOfStock
+            ? "out of stock"
+            : `${variant.inventory} in stock, free shipping`}
+        </p>
       </div>
       <Button extraClass={c.button} variant="primary" disabled={outOfStock}>
         Add to basket
       </Button>
-      <div class={[c.confirmed, c["confirmed--hidden"]].join(" ")}>
+      <div class={[c.confirmed, confirmed ? "" : c.confirmedHidden].join(" ")}>
         <p>Tractor was added.</p>
         <a href="/checkout/cart" class={c.link}>
           View in basket.

@@ -5,6 +5,7 @@ import fetchData from "../../fetchData";
 
 const AddToCartCe = ({ sku }, initialState) => {
   const [state, setState] = useState(initialState);
+  const [confirmed, setConfirmed] = useState(false);
   const isInitialRender = useRef(true);
   console.log("AddToCartCe", sku, initialState);
 
@@ -21,10 +22,13 @@ const AddToCartCe = ({ sku }, initialState) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await fetchData("/cart/item", { method: "POST", query: { sku } });
+    setConfirmed(true);
     window.dispatchEvent(new CustomEvent("checkout:cart-updated"));
   };
 
-  return <AddToCart {...state} handleSubmit={handleSubmit} />;
+  return (
+    <AddToCart {...state} confirmed={confirmed} handleSubmit={handleSubmit} />
+  );
 };
 
 AddToCartCe.propTypes = {

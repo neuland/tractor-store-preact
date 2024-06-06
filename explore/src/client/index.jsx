@@ -31,7 +31,7 @@ window.addEventListener(
 );
 
 // client-side hydration on fragment level
-register(HeaderCe, "explore-header", null, { shadow: true });
+//register(HeaderCe, "explore-header", null, { shadow: true });
 register(FooterCe, "explore-footer", null, { shadow: true });
 register(RecommendationsCe, "explore-recommendations", null, { shadow: true });
 hydrateApp();

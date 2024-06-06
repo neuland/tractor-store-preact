@@ -14,11 +14,11 @@
   display: block;
 }
 
-.stock--ok {
+.stockOk {
   color: green;
 }
 
-.stock--empty {
+.stockEmpty {
   color: red;
 }
 
@@ -32,6 +32,6 @@
   color: inherit;
 }
 
-.confirmed--hidden {
+.confirmedHidden {
   visibility: hidden;
 }

@@ -37,9 +37,8 @@ for (const path in proxyTable) {
       on: {
         proxyRes: responseInterceptor(
           async (responseBuffer, proxyRes, req, res) => {
-            //console.log(req.method, req.path);
             const body = responseBuffer.toString("utf8");
-            return await esi.process(body);
+            return await esi.process(body, { headers: req.headers });
           }
         ),
       },

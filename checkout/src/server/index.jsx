@@ -69,8 +69,10 @@ export default function createApp(beforeRoutes = (app) => {}) {
   async function renderFragment(Component, c) {
     let data = {};
     if (Component.api) {
-      const query = c.req.query();
-      data = await fetchData(Component.api, { query });
+      data = await fetchData(Component.api, {
+        query: c.req.query(),
+        headers: { cookie: c.req.header("cookie") },
+      });
     }
     const rendered = renderToString(<Component {...data} />);
     return c.html(fragmentHtml(rendered, data));
