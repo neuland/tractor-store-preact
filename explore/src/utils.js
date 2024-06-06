@@ -46,7 +46,7 @@ export function fmtprice(price) {
 function navigateClient(e) {
   const path = e.composedPath();
   const link = path.find((el) => el.tagName === "A");
-  if (link) {
+  if (link && !link.dataset.native) {
     // get href without domain
     const url = new URL(link.href);
     const path = url.pathname + url.search;

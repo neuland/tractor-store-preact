@@ -1,9 +1,9 @@
 import { h } from "preact";
-import { Router, Link } from "preact-router";
-import CategoryPage from "./pages/CategoryPage";
-import HomePage from "./pages/HomePage";
-import StoresPage from "./pages/StoresPage";
+import { Router, route } from "preact-router";
 import Fragment from "./components/Fragment";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import ThanksPage from "./pages/ThanksPage";
 import fetchData from "./fetchData";
 import { useState, useCallback } from "preact/hooks";
 import "./styles.css";
@@ -20,6 +20,7 @@ const App = ({ path, data }) => {
         return;
       }
       const api = url.current.type.api;
+      if (!api) return;
       const query = url.matches;
       const newData = await fetchData(api, { query });
       update(newData);
@@ -27,18 +28,28 @@ const App = ({ path, data }) => {
     [initial]
   );
 
+  const handleDelete = useCallback(async (sku) => {
+    await fetchData("/cart/item", { method: "DELETE", query: { sku } });
+    window.dispatchEvent(new CustomEvent("checkout:cart-updated"));
+    update(await fetchData(CartPage.api));
+  }, []);
+
   return (
     <div data-boundary="checkout-page">
-      <Fragment team="checkout" name="header" />
+      <Fragment team="explore" name="header" />
       <Router url={path} onChange={updateData}>
-        <HomePage path="/" {...state} />
-        <CategoryPage path="/products/:filter?" {...state} />
-        <StoresPage path="/stores" {...state} />
+        <CartPage
+          path="/checkout/cart"
+          {...state}
+          handleDelete={handleDelete}
+        />
+        <CheckoutPage path="/checkout/checkout" />
+        <ThanksPage path="/checkout/thanks" />
         <div default>
           <h1>404 Not Found {path}</h1>
         </div>
       </Router>
-      <Fragment team="checkout" name="footer" />
+      <Fragment team="explore" name="footer" />
     </div>
   );
 };

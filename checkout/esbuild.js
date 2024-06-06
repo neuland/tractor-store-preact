@@ -10,9 +10,10 @@ const buildBoth = async (watch = false, minify = false) => {
     minify,
     logLevel: "info",
     color: false,
-    // team namespaces
     plugins: [
-      cssModulesPlugin({ localIdentName: "ex_[local]--[hash:4:md5:hex]" }),
+      // add team prefix to css class names
+      // use native esbuild support when ready https://github.com/evanw/esbuild/issues/3484
+      cssModulesPlugin({ localIdentName: "ch_[local]--[hash]" }),
     ],
   };
 
@@ -40,9 +41,9 @@ const buildBoth = async (watch = false, minify = false) => {
 
   if (watch) {
     const client = await esbuild.context(clientOptions);
+    await client.watch();
     const server = await esbuild.context(serverOptions);
-    client.watch();
-    server.watch();
+    await server.watch();
   }
 };
 

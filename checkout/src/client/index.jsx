@@ -1,8 +1,7 @@
 import { h, hydrate } from "preact";
 import register from "preact-custom-element";
-import HeaderCe from "./fragments/HeaderCe";
-import FooterCe from "./fragments/FooterCe";
-import RecommendationsCe from "./fragments/RecommendationsCe";
+import AddToCartCe from "./fragments/AddToCartCe";
+import MiniCartCe from "./fragments/MiniCartCe";
 import App from "../App";
 
 // client-side hydration on page level
@@ -21,7 +20,8 @@ window.addEventListener(
     const $el = event.target;
     const tagName = $el.tagName.toLowerCase();
     if (tagName.startsWith("checkout-") && $el.shadowRoot) {
-      const $state = $el.querySelector("script[data-state]");
+      console.log("hydrate", tagName, $el, $el.shadowRoot.innerHTML);
+      const $state = $el.shadowRoot.querySelector("script[data-state]");
       const state = JSON.parse($state?.textContent || "{}");
       event.detail.context = state;
       $el.setAttribute("hydate", true);
@@ -31,9 +31,8 @@ window.addEventListener(
 );
 
 // client-side hydration on fragment level
-register(HeaderCe, "checkout-header", null, { shadow: true });
-register(FooterCe, "checkout-footer", null, { shadow: true });
-register(RecommendationsCe, "checkout-recommendations", null, { shadow: true });
+register(AddToCartCe, "checkout-addtocart", null, { shadow: true });
+register(MiniCartCe, "checkout-minicart", null, { shadow: true });
 hydrateApp();
 
 console.log("checkout client ready");

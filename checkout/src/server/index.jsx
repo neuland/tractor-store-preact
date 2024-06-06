@@ -4,19 +4,20 @@ import dotenv from "dotenv";
 import { renderToString } from "preact-render-to-string";
 import App from "../App";
 import fetchData from "../fetchData";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Recommendations from "../components/Recommendations";
 import { html, IMAGE_SERVER } from "../utils";
 import {
-  homePageData,
-  storesPageData,
-  categoryPageData,
-  recommendationsFragmentData,
+  handleAddToCart,
+  handleRemoveFromCart,
+  handlePlaceOrder,
+  cartPageData,
+  addToCartData,
+  miniCartData,
 } from "./service";
-import HomePage from "../pages/HomePage";
-import CategoryPage from "../pages/CategoryPage";
-import StoresPage from "../pages/StoresPage";
+import CartPage from "../pages/CartPage";
+import CheckoutPage from "../pages/CheckoutPage";
+import ThanksPage from "../pages/ThanksPage";
+import MiniCart from "../components/MiniCart";
+import AddToCart from "../components/AddToCart";
 dotenv.config({ path: "../.env" });
 
 export default function createApp(beforeRoutes = (app) => {}) {
@@ -35,23 +36,34 @@ export default function createApp(beforeRoutes = (app) => {}) {
   /**
    * API endpoints
    */
-  app.get("/checkout/api/home", (c) => c.json(homePageData()));
-  app.get("/checkout/api/category", (c) =>
-    c.json(categoryPageData(c.req.query("filter")))
+  app.get("/checkout/api/cart", (c) => c.json(cartPageData(c)));
+  app.get("/checkout/api/addtocart", (c) =>
+    c.json(addToCartData(c.req.query("sku")))
   );
-  app.get("/checkout/api/stores", (c) => c.json(storesPageData()));
-  app.get("/checkout/api/recommendations", (c) =>
-    c.json(recommendationsFragmentData(c.req.query("skus")))
-  );
+  app.get("/checkout/api/minicart", (c) => c.json(miniCartData(c)));
+  app.post("/checkout/api/cart/item", async (c) => {
+    await handleAddToCart(c);
+    return c.json({ success: true });
+  });
+  app.delete("/checkout/api/cart/item", async (c) => {
+    await handleRemoveFromCart(c);
+    return c.json({ success: true });
+  });
+  app.post("/checkout/api/placeorder", async (c) => {
+    await handlePlaceOrder(c);
+    return c.json({ success: true });
+  });
 
   /**
    * ESI fragments
    */
-  app.get("/checkout/esi/header", async (c) => await renderFragment(Header, c));
-  app.get("/checkout/esi/footer", async (c) => await renderFragment(Footer, c));
   app.get(
-    "/checkout/esi/recommendations",
-    async (c) => await renderFragment(Recommendations, c)
+    "/checkout/esi/minicart",
+    async (c) => await renderFragment(MiniCart, c)
+  );
+  app.get(
+    "/checkout/esi/addtocart",
+    async (c) => await renderFragment(AddToCart, c)
   );
 
   async function renderFragment(Component, c) {
@@ -67,7 +79,9 @@ export default function createApp(beforeRoutes = (app) => {}) {
   function fragmentHtml(rendered, state = {}) {
     const json = JSON.stringify(state);
     return `
-      <template shadowrootmode="open">${rendered}</template>
+      <template shadowrootmode="open">
+        ${rendered}
+      </template>
       <script type="application/json" data-state>${json}</script>
     `;
   }
@@ -75,20 +89,17 @@ export default function createApp(beforeRoutes = (app) => {}) {
   /**
    * Pages
    */
-  app.get("/", async (c) => {
-    return await renderPage(HomePage.api, {}, c);
-  });
+  app.get("/checkout/cart", async (c) => await renderPage(CartPage, c));
+  app.get("/checkout/checkout", async (c) => await renderPage(CheckoutPage, c));
+  app.get("/checkout/thanks", async (c) => await renderPage(ThanksPage, c));
 
-  app.get("/products/:filter?", async (c) => {
-    return await renderPage(CategoryPage.api, c.req.param(), c);
-  });
-
-  app.get("/stores", async (c) => {
-    return await renderPage(StoresPage.api, {}, c);
-  });
-
-  async function renderPage(api, params = {}, c) {
-    const data = await fetchData(api, params);
+  async function renderPage(Component, c) {
+    const data = Component.api
+      ? await fetchData(Component.api, {
+          // pass browser cookies to API
+          headers: { cookie: c.req.header("cookie") },
+        })
+      : {};
     const jsx = <App data={data} path={c.req.path} />;
     const rendered = renderToString(jsx);
     const state = JSON.stringify(data || {});

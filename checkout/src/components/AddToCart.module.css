@@ -1,0 +1,37 @@
+.root {
+  padding: 1rem;
+  margin: 0 -1rem;
+}
+
+.information {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.stock {
+  display: block;
+}
+
+.stock--ok {
+  color: green;
+}
+
+.stock--empty {
+  color: red;
+}
+
+.confirmed {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75ch;
+}
+
+.confirmed a {
+  color: inherit;
+}
+
+.confirmed--hidden {
+  visibility: hidden;
+}
