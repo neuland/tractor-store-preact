@@ -2,6 +2,7 @@ import { h } from "preact";
 import { useEffect } from "preact/hooks";
 import c from "./ThanksPage.module.css";
 import Button from "../components/Button";
+import Fragment from "../components/Fragment";
 import confetti from "canvas-confetti";
 
 const ThanksPage = () => {
@@ -36,13 +37,16 @@ const ThanksPage = () => {
   }, []);
 
   return (
-    <main class={c.root}>
-      <h2 class={c.title}>Thanks for your order!</h2>
-      <p class={c.text}>We'll notify you, when its ready for pickup.</p>
-      <Button href="/" variant="secondary" data-native>
-        Continue Shopping
-      </Button>
-    </main>
+    <div>
+      <Fragment team="explore" name="header" />
+      <main class={c.root}>
+        <h2 class={c.title}>Thanks for your order!</h2>
+        <p class={c.text}>We'll notify you, when its ready for pickup.</p>
+        <Button href="/" variant="secondary" data-native>
+          Continue Shopping
+        </Button>
+      </main>
+    </div>
   );
 };
 

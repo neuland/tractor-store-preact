@@ -36,7 +36,6 @@ const App = ({ path, data }) => {
 
   return (
     <div data-boundary="checkout-page">
-      <Fragment team="explore" name="header" />
       <Router url={path} onChange={updateData}>
         <CartPage
           path="/checkout/cart"

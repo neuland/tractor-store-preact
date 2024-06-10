@@ -5,6 +5,7 @@ import fetchData from "../fetchData";
 import Button from "../components/Button.jsx";
 import Fragment from "../components/Fragment.jsx";
 import c from "./CheckoutPage.module.css";
+import CompactHeader from "../components/CompactHeader.jsx";
 
 const STORE_PICKER_EVENT = "explore:store-selected";
 
@@ -41,75 +42,78 @@ const Checkout = () => {
   };
 
   return (
-    <main class={c.root}>
-      <h2>Checkout</h2>
-      <form
-        action="/checkout/api/placeorder"
-        method="post"
-        class={c.form}
-        onSubmit={handleSubmit}
-      >
-        <h3>Personal Data</h3>
-        <fieldset class={c.name}>
-          <div>
-            <label class={c.label} for="c_firstname">
-              First name
+    <div>
+      <CompactHeader />
+      <main class={c.root}>
+        <h2>Checkout</h2>
+        <form
+          action="/checkout/api/placeorder"
+          method="post"
+          class={c.form}
+          onSubmit={handleSubmit}
+        >
+          <h3>Personal Data</h3>
+          <fieldset class={c.name}>
+            <div>
+              <label class={c.label} for="c_firstname">
+                First name
+              </label>
+              <input
+                class={c.input}
+                type="text"
+                id="c_firstname"
+                name="firstname"
+                value={firstname}
+                onInput={(e) => setFirstname(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label class={c.label} for="c_lastname">
+                Last name
+              </label>
+              <input
+                class={c.input}
+                type="text"
+                id="c_lastname"
+                name="lastname"
+                value={lastname}
+                onInput={(e) => setLastname(e.target.value)}
+                required
+              />
+            </div>
+          </fieldset>
+
+          <h3>Store Pickup</h3>
+          <fieldset>
+            <div class={c.store} ref={storePickerRef}>
+              <Fragment team="explore" name="storepicker" />
+            </div>
+            <label class={c.label} for="c_storeId">
+              Store ID
             </label>
             <input
               class={c.input}
               type="text"
-              id="c_firstname"
-              name="firstname"
-              value={firstname}
-              onInput={(e) => setFirstname(e.target.value)}
+              id="c_storeId"
+              name="storeId"
+              value={storeId}
+              readonly
               required
             />
-          </div>
-          <div>
-            <label class={c.label} for="c_lastname">
-              Last name
-            </label>
-            <input
-              class={c.input}
-              type="text"
-              id="c_lastname"
-              name="lastname"
-              value={lastname}
-              onInput={(e) => setLastname(e.target.value)}
-              required
-            />
-          </div>
-        </fieldset>
+          </fieldset>
 
-        <h3>Store Pickup</h3>
-        <fieldset>
-          <div class={c.store} ref={storePickerRef}>
-            <Fragment team="explore" name="storepicker" />
+          <div class={c.buttons}>
+            <Button type="submit" variant="primary" disabled={isButtonDisabled}>
+              Place Order
+            </Button>
+            <Button href="/checkout/cart" variant="secondary">
+              Back to Cart
+            </Button>
           </div>
-          <label class={c.label} for="c_storeId">
-            Store ID
-          </label>
-          <input
-            class={c.input}
-            type="text"
-            id="c_storeId"
-            name="storeId"
-            value={storeId}
-            readonly
-            required
-          />
-        </fieldset>
-
-        <div class={c.buttons}>
-          <Button type="submit" variant="primary" disabled={isButtonDisabled}>
-            Place Order
-          </Button>
-          <Button href="/checkout/cart" variant="secondary">
-            Back to Cart
-          </Button>
-        </div>
-      </form>
-    </main>
+        </form>
+      </main>
+    </div>
   );
 };
 

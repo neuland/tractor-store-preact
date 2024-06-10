@@ -7,25 +7,28 @@ import LineItem from "../components/LineItem";
 
 const CartPage = ({ lineItems = [], total, skus, handleDelete = () => {} }) => {
   return (
-    <main class={c.root}>
-      <h2>Shopping Cart</h2>
-      <ul class={c.lineItems}>
-        {lineItems.map((l) => (
-          <LineItem {...l} handleDelete={handleDelete} />
-        ))}
-      </ul>
-      <hr />
-      <p class={c.total}>Total: {fmtprice(total)}</p>
-      <div class={c.buttons}>
-        <Button href="/checkout/checkout" variant="primary">
-          Checkout
-        </Button>
-        <Button href="/" variant="secondary" data-native>
-          Continue Shopping
-        </Button>
-      </div>
-      <Fragment team="explore" name="recommendations" skus={skus.join(",")} />
-    </main>
+    <div>
+      <Fragment team="explore" name="header" />
+      <main class={c.root}>
+        <h2>Shopping Cart</h2>
+        <ul class={c.lineItems}>
+          {lineItems.map((l) => (
+            <LineItem {...l} handleDelete={handleDelete} />
+          ))}
+        </ul>
+        <hr />
+        <p class={c.total}>Total: {fmtprice(total)}</p>
+        <div class={c.buttons}>
+          <Button href="/checkout/checkout" variant="primary">
+            Checkout
+          </Button>
+          <Button href="/" variant="secondary" data-native>
+            Continue Shopping
+          </Button>
+        </div>
+        <Fragment team="explore" name="recommendations" skus={skus.join(",")} />
+      </main>
+    </div>
   );
 };
 
