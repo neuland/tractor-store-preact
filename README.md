@@ -36,11 +36,29 @@ List of techniques used in this implementation.
 
 This implementation is deliberately kept simple to focus on the micro frontends aspects. URLs are hardcoded, components could be more DRY and no linting, testing or type-safety is implemented. In a real-world scenario, these aspects should be addressed properly.
 
-### Open Todos
+### Todos
 
 - [x] Implement all blueprint features
 - [ ] Public deployment via Cloudflare Workers
+- [ ] Web performance optimizations (e.g. on-demand loading, proper chunking, best practices, ...)
 - [ ] Improve DX (linting, HMR, error handling)
+- [ ] Fix CSS Modules warning in build process (see below)
+
+#### CSS Modules Warning
+
+When running the application in development mode, the following warning is displayed multiple times:
+
+```
+[checkout] [build] initial build failed Error: Build failed with 1 error:
+[checkout] [build] src/pages/CartPage.module.css:2:15: ERROR: Could not resolve "/var/folders/09/.../T/.../Users/[project]/checkout/src/pages/CartPage.css"
+[checkout] [build]     at failureErrorWithLog (/Users/[project]/checkout/node_modules/esbuild/lib/main.js:1472:15)
+[checkout] [build]     at /Users/[project]/checkout/node_modules/esbuild/lib/main.js:945:25
+[checkout] [build]     at runOnEndCallbacks (/Users/[project]/checkout/node_modules/esbuild/lib/main.js:1315:45)
+```
+
+This is a an open issue in [esbuild-plugin-css-modules#6](https://github.com/koluch/esbuild-plugin-css-modules/issues/6).
+The library is used because esbuild does not yet support CSS class prefixing [esbuild#3484](https://github.com/evanw/esbuild/issues/3484).
+This warning can be ignored. Affected assets are rebuilt automatically.
 
 ## How to run locally
 
@@ -70,6 +88,6 @@ Open http://localhost:3000 in your browser to see the integrated application.
 
 Server- and client-side code is rebuilt automatically when you make changes. The servers restart automatically as well. You have to reload the browser manually.
 
-## About the Authors
+## About The Authors
 
 [neuland Büro für Informatik](https://neuland-bfi.de/) is a software development company based in Germany. We have a strong e-commerce background and experience in building verticalized software solutions.
