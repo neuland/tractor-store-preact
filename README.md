@@ -54,9 +54,9 @@ cd tractor-store-preact
 Install dependencies:
 
 ```bash
-# root directory
+# install root dependencies (local only)
 npm install
-# each team directory
+# install dependencies in all projects
 npm run install:all
 ```
 
