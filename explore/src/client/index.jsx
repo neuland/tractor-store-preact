@@ -9,29 +9,13 @@ import App from "../App";
 function hydrateApp() {
   const $app = document.getElementById("explore-app");
   if ($app) {
-    const state = JSON.parse($app.nextElementSibling.textContent || "{}");
-    hydrate(<App data={state} />, $app);
+    const initialState = window.EXPLORE_APP || {};
+    hydrate(<App data={initialState} />, $app);
   }
 }
 
-// hook into preact-custom-elements initialization and provide state from DOM to custom elements
-window.addEventListener(
-  "_preact",
-  (event) => {
-    const $el = event.target;
-    const tagName = $el.tagName.toLowerCase();
-    if (tagName.startsWith("explore-") && $el.shadowRoot) {
-      const $state = $el.querySelector("script[data-state]");
-      const state = JSON.parse($state?.textContent || "{}");
-      event.detail.context = state;
-      $el.setAttribute("hydate", true);
-    }
-  },
-  { capture: true }
-);
-
 // client-side hydration on fragment level
-//register(HeaderCe, "explore-header", null, { shadow: true });
+register(HeaderCe, "explore-header", null, { shadow: true });
 register(FooterCe, "explore-footer", null, { shadow: true });
 register(RecommendationsCe, "explore-recommendations", null, { shadow: true });
 hydrateApp();

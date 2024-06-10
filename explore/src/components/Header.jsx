@@ -4,7 +4,7 @@ import Fragment from "./Fragment";
 import { IMAGE_SERVER } from "../utils";
 import c from "./Header.module.css";
 
-export default () => {
+const Header = () => {
   return (
     <header class={c.header} data-boundary="explore-header">
       <link rel="stylesheet" href="/explore/static/client.css" />
@@ -28,3 +28,5 @@ export default () => {
     </header>
   );
 };
+
+export default Header;

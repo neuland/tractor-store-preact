@@ -8,30 +8,10 @@ import App from "../App";
 function hydrateApp() {
   const $app = document.getElementById("checkout-app");
   if ($app) {
-    const state = JSON.parse($app.nextElementSibling.textContent || "{}");
-    hydrate(<App data={state} />, $app);
+    const initialState = window.CHECKOUT_APP || {};
+    hydrate(<App data={initialState} />, $app);
   }
 }
-
-// hook into preact-custom-elements initialization and provide state from DOM to custom elements
-window.addEventListener(
-  "_preact",
-  (event) => {
-    console.log("hydrate", event);
-    const $el = event.target;
-    const tagName = $el.tagName.toLowerCase();
-    console.log("hydrate", tagName, $el);
-    if (tagName.startsWith("checkout-") && $el.shadowRoot) {
-      console.log("hydrate", tagName, $el, $el.shadowRoot.innerHTML);
-      const $state = $el.shadowRoot.querySelector("script[data-state]");
-      const state = JSON.parse($state?.textContent || "{}");
-      event.detail.context = state;
-      console.log("hydrate", tagName, state, $state?.textContent);
-      $el.setAttribute("hydate", true);
-    }
-  },
-  { capture: true }
-);
 
 // client-side hydration on fragment level
 register(AddToCartCe, "checkout-addtocart", null, { shadow: true });

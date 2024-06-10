@@ -3,7 +3,9 @@ import { useEffect, useState, useRef } from "preact/hooks";
 import AddToCart from "../../components/AddToCart";
 import fetchData from "../../fetchData";
 
-const AddToCartCe = ({ sku }, initialState) => {
+const initialState = window.CHECKOUT_ADDTOCART || {};
+
+const AddToCartCe = ({ sku }) => {
   const [state, setState] = useState(initialState);
   const [confirmed, setConfirmed] = useState(false);
   const isInitialRender = useRef(true);

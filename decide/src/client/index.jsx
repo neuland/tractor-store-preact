@@ -5,8 +5,8 @@ import App from "../App";
 function hydrateApp() {
   const $app = document.getElementById("decide-app");
   if ($app) {
-    const state = JSON.parse($app.nextElementSibling.textContent || "{}");
-    hydrate(<App data={state} />, $app);
+    const initialState = window.DECIDE_APP || {};
+    hydrate(<App data={initialState} />, $app);
     console.log("decide app hydrated");
   }
 }

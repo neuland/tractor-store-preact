@@ -2,7 +2,7 @@ import { h } from "preact";
 import { IMAGE_SERVER } from "../utils";
 import c from "./Footer.module.css";
 
-export default () => {
+const Footer = () => {
   return (
     <footer class={c.footer} data-boundary="explore-footer">
       <link rel="stylesheet" href="/explore/static/client.css" />
@@ -60,3 +60,5 @@ export default () => {
     </footer>
   );
 };
+
+export default Footer;

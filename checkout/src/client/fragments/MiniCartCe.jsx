@@ -3,7 +3,9 @@ import { useEffect, useState, useRef } from "preact/hooks";
 import MiniCart from "../../components/MiniCart";
 import fetchData from "../../fetchData";
 
-const MiniCartCe = ({}, initialState) => {
+const initialState = window.CHECKOUT_MINICART || {};
+
+const MiniCartCe = ({}) => {
   const [state, setState] = useState(initialState);
   const [highlight, setHighlight] = useState(false);
   const isInitialRender = useRef(true);

@@ -42,11 +42,11 @@ export default function createApp(beforeRoutes = (app) => {}) {
     const data = await fetchData(api, params);
     const jsx = <App data={data} path={c.req.path} />;
     const rendered = renderToString(jsx);
-    const state = JSON.stringify(data || {});
-    return c.html(pageHtml(rendered, state));
+    return c.html(pageHtml(rendered, data));
   }
 
-  function pageHtml(rendered, state) {
+  function pageHtml(rendered, data) {
+    const json = JSON.stringify(data || {});
     return html`
       <!DOCTYPE html>
       <html>
@@ -58,8 +58,8 @@ export default function createApp(beforeRoutes = (app) => {}) {
         </head>
         <body data-boundary="decide-page">
           <div id="decide-app">${rendered}</div>
-          <script type="application/json" data-state>
-            ${state}
+          <script>
+            window.DECIDE_APP = ${json};
           </script>
           <script src="/explore/static/client.js" type="module"></script>
           <script src="/checkout/static/client.js" type="module"></script>
