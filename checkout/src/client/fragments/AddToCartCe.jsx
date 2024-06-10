@@ -9,7 +9,6 @@ const AddToCartCe = ({ sku }) => {
   const [state, setState] = useState(initialState);
   const [confirmed, setConfirmed] = useState(false);
   const isInitialRender = useRef(true);
-  console.log("AddToCartCe", sku, initialState);
 
   useEffect(async () => {
     if (isInitialRender.current && state.variant) {

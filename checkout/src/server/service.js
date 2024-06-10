@@ -21,7 +21,6 @@ export function writeToCookie(items, c) {
   const cookieStr = items
     .map((item) => `${item.sku}${QTY_SEP}${item.quantity}`)
     .join(ITEM_SEP);
-  console.log("writeToCookie", cookieStr);
   setCookie(c, COOKIE, cookieStr, { httpOnly: true });
 }
 

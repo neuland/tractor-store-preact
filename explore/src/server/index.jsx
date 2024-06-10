@@ -7,6 +7,7 @@ import fetchData from "../fetchData";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Recommendations from "../components/Recommendations";
+import StorePicker from "../components/StorePicker";
 import { html, IMAGE_SERVER } from "../utils";
 import {
   homePageData,
@@ -52,6 +53,10 @@ export default function createApp(beforeRoutes = (app) => {}) {
   app.get(
     "/explore/esi/recommendations",
     async (c) => await renderFragment(Recommendations, c)
+  );
+  app.get(
+    "/explore/esi/storepicker",
+    async (c) => await renderFragment(StorePicker, c)
   );
 
   async function renderFragment(Component, c) {

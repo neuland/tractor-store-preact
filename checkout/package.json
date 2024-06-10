@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@hono/node-server": "^1.11.1",
+    "canvas-confetti": "^1.9.3",
     "dotenv": "^16.4.5",
     "hono": "^4.4.0",
     "preact": "^10.22.0",
