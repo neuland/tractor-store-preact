@@ -56,7 +56,7 @@ export default function createApp(beforeRoutes = (app) => {}) {
           <link rel="stylesheet" href="/decide/static/client.css" />
           <link rel="stylesheet" href="/checkout/static/client.css" />
         </head>
-        <body data-boundary="decide-page">
+        <body data-boundary-page="decide">
           <div id="decide-app">${rendered}</div>
           <script>
             window.DECIDE_APP = ${json};
@@ -64,7 +64,10 @@ export default function createApp(beforeRoutes = (app) => {}) {
           <script src="/explore/static/client.js" type="module"></script>
           <script src="/checkout/static/client.js" type="module"></script>
           <script src="/decide/static/client.js" type="module"></script>
-          <script src="${IMAGE_SERVER}/cdn/js/helper.js" type="module"></script>
+          <script
+            src="http://localhost:4000/cdn/js/helper.js"
+            type="module"
+          ></script>
         </body>
       </html>
     `;

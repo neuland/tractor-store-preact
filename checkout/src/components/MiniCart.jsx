@@ -6,7 +6,7 @@ const MiniCart = ({ quantity, highlight }) => {
   return (
     <div
       class={`${c.root} ${highlight ? c.highlight : ""}`}
-      data-boundary="checkout-minicart"
+      data-boundary="checkout"
     >
       <link rel="stylesheet" href="/checkout/static/client.css" />
       <Button

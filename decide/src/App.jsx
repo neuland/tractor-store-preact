@@ -26,7 +26,7 @@ const App = ({ path, data }) => {
   );
 
   return (
-    <div data-boundary="decide-page">
+    <div>
       <Fragment team="explore" name="header" />
       <Router url={path} onChange={updateData}>
         <ProductPage path="/product/:id?" {...state} />

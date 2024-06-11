@@ -15,7 +15,7 @@ const AddToCart = ({
       action="/checkout/api/cart/item"
       method="POST"
       class={c.root}
-      data-boundary="checkout-button"
+      data-boundary="checkout"
       onSubmit={handleSubmit}
     >
       <link rel="stylesheet" href="/checkout/static/client.css" />

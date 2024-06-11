@@ -4,7 +4,7 @@ import c from "./Footer.module.css";
 
 const Footer = () => {
   return (
-    <footer class={c.footer} data-boundary="explore-footer">
+    <footer class={c.footer} data-boundary="explore">
       <link rel="stylesheet" href="/explore/static/client.css" />
       <div class={c.cutter}>
         <div class={c.inner}>

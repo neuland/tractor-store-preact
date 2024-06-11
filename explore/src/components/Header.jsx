@@ -6,7 +6,7 @@ import c from "./Header.module.css";
 
 const Header = () => {
   return (
-    <header class={c.header} data-boundary="explore-header">
+    <header class={c.header} data-boundary="explore">
       <link rel="stylesheet" href="/explore/static/client.css" />
       <div class={c.cutter}>
         <div class={c.inner}>

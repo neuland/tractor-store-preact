@@ -24,17 +24,13 @@ const StorePicker = ({ stores = [] }) => {
   return (
     <div class={c.root}>
       <link rel="stylesheet" href="/explore/static/client.css" />
-      <div class={c.control} data-boundary="explore-storepicker">
+      <div class={c.control} data-boundary="explore">
         <div class={c.selected}></div>
         <Button className={c.recommendation} type="button" onClick={openModal}>
           Choose a store
         </Button>
       </div>
-      <dialog
-        class={c.dialog}
-        ref={dialogRef}
-        data-boundary="explore-storepicker (dialog)"
-      >
+      <dialog class={c.dialog} ref={dialogRef} data-boundary="explore">
         <div class={c.wrapper}>
           <h2>Stores</h2>
           <ul class={c.list}>

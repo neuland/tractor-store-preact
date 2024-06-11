@@ -29,7 +29,7 @@ const App = ({ path, data }) => {
   );
 
   return (
-    <div data-boundary="explore-page">
+    <div>
       <Fragment team="explore" name="header" onClick={navigate} />
       <Router url={path} onChange={updateData}>
         <HomePage path="/" {...state} />
