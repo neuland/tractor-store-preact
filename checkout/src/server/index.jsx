@@ -128,10 +128,7 @@ export default function createApp(beforeRoutes = (app) => {}) {
           <script src="/explore/static/client.js" type="module"></script>
           <script src="/decide/static/client.js" type="module"></script>
           <script src="/checkout/static/client.js" type="module"></script>
-          <script
-            src="http://localhost:4000/cdn/js/helper.js"
-            type="module"
-          ></script>
+          <script src="${IMAGE_SERVER}/cdn/js/helper.js" type="module"></script>
         </body>
       </html>
     `;

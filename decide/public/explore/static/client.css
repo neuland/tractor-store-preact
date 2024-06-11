@@ -19,11 +19,7 @@
   font-size: 13px;
   letter-spacing: 4px;
   text-decoration: none;
-  background:
-    linear-gradient(
-      0deg,
-      #f5f5f5,
-      #fff);
+  background: linear-gradient(0deg, #f5f5f5, #fff);
   border-bottom: 1px solid #eeebe2;
 }
 .ex_item--hab80:hover a,
@@ -41,19 +37,19 @@
 }
 .ex_item--hab80 a::before {
   left: 0;
-  background:
-    linear-gradient(
-      -90deg,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 1));
+  background: linear-gradient(
+    -90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1)
+  );
 }
 .ex_item--hab80 a::after {
   right: 0;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 1));
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1)
+  );
 }
 
 /* ../../../../../private/var/folders/09/6h9fyj312rl6lkm877x0pzp00000gn/T/tmp-1765-vsKxnIIgKmuu/Users/michael/Lab/tractor-store-preact/explore/src/components/Header.css */
@@ -63,25 +59,25 @@
   align-items: center;
 }
 .ex_cutter--he77d {
-  @media (min-width:1100px) {
+  @media (min-width: 1100px) {
     margin: 0 calc(var(--outer-space) * -1);
   }
   overflow: hidden;
   padding: 0 0 30px;
 }
 .ex_inner--h0d78 {
-  @media (max-width:999px) {
+  @media (max-width: 999px) {
     display: grid;
     grid-template: "logo mini-cart" "navigation navigation";
   }
-  @media (min-width:1000px) {
+  @media (min-width: 1000px) {
     padding: 0 var(--outer-space);
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
   }
-  @media (min-width:1000px) and (max-width:1099px) {
+  @media (min-width: 1000px) and (max-width: 1099px) {
     padding: 0;
     display: flex;
     align-items: center;
@@ -101,20 +97,20 @@
   width: 48px;
   height: calc(100% + 30px);
 }
-@media (min-width:1000px) {
+@media (min-width: 1000px) {
   .ex_inner--h0d78::before,
   .ex_inner--h0d78::after {
     content: "";
     display: block;
   }
 }
-@media (max-width:1099px) {
+@media (max-width: 1099px) {
   .ex_inner--h0d78::before,
   .ex_inner--h0d78::after {
     width: var(--outer-space);
   }
 }
-@media (min-width:1100px) {
+@media (min-width: 1100px) {
   .ex_inner--h0d78::before,
   .ex_inner--h0d78::after {
     width: calc(var(--outer-space) * 2);
@@ -122,35 +118,35 @@
 }
 .ex_inner--h0d78::before {
   left: 0;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
 }
-@media (min-width:1100px) {
+@media (min-width: 1100px) {
   .ex_inner--h0d78::before {
     left: calc(var(--outer-space) * -1);
   }
 }
 .ex_inner--h0d78::after {
   right: 0;
-  background:
-    linear-gradient(
-      -90deg,
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    -90deg,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
 }
-@media (min-width:1100px) {
+@media (min-width: 1100px) {
   .ex_inner--h0d78::after {
     right: calc(var(--outer-space) * -1);
   }
 }
 .ex_logo--hd0fd {
-  @media (max-width:499px) {
+  @media (max-width: 499px) {
     width: 170px;
   }
-  @media (min-width:500px) {
+  @media (min-width: 500px) {
     width: 270px;
   }
   display: block;
@@ -167,7 +163,7 @@
   justify-content: flex-end;
 }
 .ex_navigation--heaed {
-  @media (max-width:999px) {
+  @media (max-width: 999px) {
     margin-bottom: 1rem;
   }
   grid-area: navigation;
@@ -180,21 +176,21 @@
   align-items: center;
 }
 .ex_cutter--ha57a {
-  @media (min-width:1100px) {
+  @media (min-width: 1100px) {
     margin: 0 calc(var(--outer-space) * -1);
   }
   overflow: hidden;
   padding: 30px 0 0;
 }
 .ex_inner--h5b70 {
-  @media (max-width:999px) {
+  @media (max-width: 999px) {
     padding: 3rem var(--outer-space);
   }
-  @media (min-width:1000px) {
+  @media (min-width: 1000px) {
     display: flex;
     padding: 3rem calc(2 * var(--outer-space));
   }
-  @media (min-width:1000px) and (max-width:1099px) {
+  @media (min-width: 1000px) and (max-width: 1099px) {
     padding: 3rem var(--outer-space);
     display: flex;
   }
@@ -210,20 +206,20 @@
   width: 48px;
   height: calc(100% + 30px);
 }
-@media (min-width:1000px) {
+@media (min-width: 1000px) {
   .ex_inner--h5b70::before,
   .ex_inner--h5b70::after {
     content: "";
     display: block;
   }
 }
-@media (max-width:1099px) {
+@media (max-width: 1099px) {
   .ex_inner--h5b70::before,
   .ex_inner--h5b70::after {
     width: var(--outer-space);
   }
 }
-@media (min-width:1100px) {
+@media (min-width: 1100px) {
   .ex_inner--h5b70::before,
   .ex_inner--h5b70::after {
     width: calc(var(--outer-space) * 2);
@@ -231,26 +227,26 @@
 }
 .ex_inner--h5b70::before {
   left: 0;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
 }
-@media (min-width:1100px) {
+@media (min-width: 1100px) {
   .ex_inner--h5b70::before {
     left: calc(var(--outer-space) * -1);
   }
 }
 .ex_inner--h5b70::after {
   right: 0;
-  background:
-    linear-gradient(
-      -90deg,
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    -90deg,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
 }
-@media (min-width:1100px) {
+@media (min-width: 1100px) {
   .ex_inner--h5b70::after {
     right: calc(var(--outer-space) * -1);
   }
@@ -296,7 +292,7 @@
 .ex_recommendation--h1b1b {
   margin: 0;
 }
-@media (min-width:500px) and (max-width:999px) {
+@media (min-width: 500px) and (max-width: 999px) {
   .ex_recommendation--h1b1b:nth-child(4) {
     display: none;
   }
@@ -324,13 +320,13 @@
   margin: 0 -1rem 3rem;
 }
 .ex_list--h7801 {
-  @media (max-width:499px) {
+  @media (max-width: 499px) {
     grid-template-columns: 1fr 1fr;
   }
-  @media (min-width:500px) and (max-width:999px) {
+  @media (min-width: 500px) and (max-width: 999px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
-  @media (min-width:1000px) {
+  @media (min-width: 1000px) {
     grid-template-columns: repeat(4, 1fr);
   }
   position: relative;
@@ -416,17 +412,17 @@
   padding: 0;
   list-style-type: none;
 }
-@media (max-width:499px) {
+@media (max-width: 499px) {
   .ex_list--hd7c2 {
     grid-template-columns: 1fr;
   }
 }
-@media (min-width:500px) and (max-width:999px) {
+@media (min-width: 500px) and (max-width: 999px) {
   .ex_list--hd7c2 {
     grid-template-columns: 1fr 1fr;
   }
 }
-@media (min-width:1000px) {
+@media (min-width: 1000px) {
   .ex_list--hd7c2 {
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -444,7 +440,7 @@
 
 /* ../../../../../private/var/folders/09/6h9fyj312rl6lkm877x0pzp00000gn/T/tmp-1765-vsKxnIIgKmuu/Users/michael/Lab/tractor-store-preact/explore/src/pages/HomePage.css */
 .ex_page--h6487 {
-  @media (min-width:500px) {
+  @media (min-width: 500px) {
     grid-template-columns: 1fr 1fr;
     display: grid;
     gap: 1rem;
@@ -496,7 +492,8 @@
 /* src/styles.css */
 @font-face {
   font-family: "Raleway";
-  src: url(https://cdn.the-tractor.store/cdn/font/raleway-regular.woff2) format("woff2");
+  src: url(https://blueprint.the-tractor.store/cdn/font/raleway-regular.woff2)
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -504,12 +501,7 @@
   box-sizing: border-box;
 }
 html {
-  font-family:
-    Raleway,
-    "Helvetica Neue",
-    Helvetica,
-    Arial,
-    sans-serif;
+  font-family: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
 body {
