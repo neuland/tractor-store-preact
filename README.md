@@ -1,6 +1,6 @@
 # The Tractor Store - Preact
 
-A micro frontends sample implementation written in [Preact](https://preactjs.com/) and based on the [Tractor Store Blueprint](https://github.com/neuland/tractor-store-blueprint) by [neuland](https://neuland-bfi.de/).
+A micro frontends sample implementation of [The Tractor Store](https://micro-frontends.org/tractor-store/) built with Preact, ESI and Web Components. It's based on the [Blueprint](https://github.com/neuland/tractor-store-blueprint).
 
 **Live Demo:** [TBA](#)
 
