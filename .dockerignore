@@ -1,0 +1,10 @@
+node_modules
+*/node_modules
+.git
+.env
+*.log
+dist
+*/dist
+public
+*/public
+.claude
