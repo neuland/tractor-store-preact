@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node esbuild.js",
-    "start": "concurrently -n build,serve      'npm:build -- --watch'  'node --watch dist/server.node.js'",
-    "prod": " concurrently -n build,serve -m 1 'npm:build -- --minify' 'node dist/server.node.js'"
+    "build": "node esbuild.js -- --minify",
+    "start": "concurrently -n build,serve      'node esbuild.js -- --watch'  'node --watch dist/server.node.js'",
+    "prod": "node dist/server.node.js"
   },
   "author": "",
   "license": "ISC",

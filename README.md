@@ -2,7 +2,7 @@
 
 A micro frontends sample implementation of [The Tractor Store](https://micro-frontends.org/tractor-store/) built with Preact, ESI and Web Components. It's based on the [Blueprint](https://github.com/neuland/tractor-store-blueprint).
 
-**Live Demo:** [TBA](#)
+**Live Demo:** [tractor-store-preact-production.up.railway.app](https://tractor-store-preact-production.up.railway.app)
 
 ## About This Implementation
 
@@ -38,7 +38,6 @@ This implementation is deliberately kept simple to focus on the micro frontends 
 
 ### Todos
 
-- [ ] Public deployment via Cloudflare Workers
 - [ ] Web performance optimizations (e.g. on-demand loading, proper chunking, best practices, ...)
 - [ ] Improve DX (linting, HMR, error handling)
 - [ ] Show selected store on checkout page
@@ -71,6 +70,18 @@ npm start
 Open http://localhost:3000 in your browser to see the integrated application.
 
 Server- and client-side code is rebuilt automatically when you make changes. The servers restart automatically as well. You have to reload the browser manually.
+
+## Deployment
+
+The application runs in a single Docker container with all 4 services. Only port 3000 (integration/gateway) is exposed.
+
+### Build and push to GitHub Container Registry
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/neuland/tractor-store-preact:latest --push .
+```
+
+Image: `ghcr.io/neuland/tractor-store-preact:latest`
 
 ## About The Authors
 
