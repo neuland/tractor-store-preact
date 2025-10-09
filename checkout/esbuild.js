@@ -1,5 +1,5 @@
 const esbuild = require("esbuild");
-const cssModulesPlugin = require("esbuild-plugin-css-modules");
+const CssModulesPlugin = require("esbuild-css-modules-plugin");
 
 // Function to build both client and server
 const buildBoth = async (watch = false, minify = false) => {
@@ -12,8 +12,11 @@ const buildBoth = async (watch = false, minify = false) => {
     color: false,
     plugins: [
       // add team prefix to css class names
-      // use native esbuild support when ready https://github.com/evanw/esbuild/issues/3484
-      cssModulesPlugin({ localIdentName: "ch_[local]--[hash]" }),
+      // using Lightning CSS based plugin for better compatibility
+      CssModulesPlugin({
+        pattern: "ch_[hash]_[local]",
+        localsConvention: "camelCaseOnly"
+      }),
     ],
   };
 

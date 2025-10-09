@@ -11,18 +11,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hono/node-server": "^1.11.1",
+    "@hono/node-server": "^1.13.7",
     "canvas-confetti": "^1.9.3",
-    "dotenv": "^16.4.5",
-    "hono": "^4.4.0",
-    "preact": "^10.22.0",
+    "dotenv": "^16.4.7",
+    "hono": "^4.7.10",
+    "preact": "^10.26.1",
     "preact-custom-element": "^4.3.0",
-    "preact-render-to-string": "^6.5.3",
+    "preact-render-to-string": "^6.6.1",
     "preact-router": "^4.1.2"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "esbuild": "^0.21.4",
-    "esbuild-plugin-css-modules": "^0.3.0"
+    "concurrently": "^9.1.2",
+    "esbuild": "^0.25.10",
+    "esbuild-css-modules-plugin": "^3.1.5"
   }
 }
