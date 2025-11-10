@@ -42,5 +42,6 @@ const AddToCart = ({
 };
 
 AddToCart.api = "/addtocart";
+AddToCart.stateKey = "CHECKOUT_ADDTOCART";
 
 export default AddToCart;

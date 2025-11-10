@@ -13,5 +13,6 @@ const Recommendations = ({ recommendations = [] }) => {
 };
 
 Recommendations.api = "/recommendations";
+Recommendations.stateKey = "EXPLORE_RECOMMENDATIONS";
 
 export default Recommendations;

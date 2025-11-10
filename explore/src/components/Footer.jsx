@@ -61,4 +61,6 @@ const Footer = () => {
   );
 };
 
+Footer.stateKey = "EXPLORE_FOOTER";
+
 export default Footer;

@@ -3,7 +3,7 @@ import StorePicker from "../../components/StorePicker";
 import { useEffect, useState, useRef } from "preact/hooks";
 import fetchData from "../../fetchData";
 
-const initialState = window.EXPLORE_STOREPICKER || {};
+const initialState = window[StorePicker.stateKey] || {};
 
 const StorePickerCe = ({}) => {
   const [state, setState] = useState(initialState);

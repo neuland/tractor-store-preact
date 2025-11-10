@@ -42,5 +42,6 @@ const MiniCart = ({ quantity, highlight }) => {
 };
 
 MiniCart.api = "/minicart";
+MiniCart.stateKey = "CHECKOUT_MINICART";
 
 export default MiniCart;

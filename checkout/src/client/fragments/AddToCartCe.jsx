@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "preact/hooks";
 import AddToCart from "../../components/AddToCart";
 import fetchData from "../../fetchData";
 
-const initialState = window.CHECKOUT_ADDTOCART || {};
+const initialState = window[AddToCart.stateKey] || {};
 
 const AddToCartCe = ({ sku }) => {
   const [state, setState] = useState(initialState);

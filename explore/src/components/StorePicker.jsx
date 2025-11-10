@@ -69,5 +69,6 @@ const StorePicker = ({ stores = [] }) => {
 };
 
 StorePicker.api = "/stores";
+StorePicker.stateKey = "EXPLORE_STOREPICKER";
 
 export default StorePicker;

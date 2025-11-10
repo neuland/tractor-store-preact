@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "preact/hooks";
 import MiniCart from "../../components/MiniCart";
 import fetchData from "../../fetchData";
 
-const initialState = window.CHECKOUT_MINICART || {};
+const initialState = window[MiniCart.stateKey] || {};
 
 const MiniCartCe = ({}) => {
   const [state, setState] = useState(initialState);

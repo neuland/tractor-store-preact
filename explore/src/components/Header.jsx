@@ -29,4 +29,6 @@ const Header = () => {
   );
 };
 
+Header.stateKey = "EXPLORE_HEADER";
+
 export default Header;

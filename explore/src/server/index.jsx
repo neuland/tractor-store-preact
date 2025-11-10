@@ -66,9 +66,7 @@ export default function createApp(beforeRoutes = (app) => {}) {
       data = await fetchData(Component.api, { query });
     }
     const rendered = renderToString(<Component {...data} />);
-    // TODO: use a more unique key including the query
-    const stateKey = `EXPLORE_${Component.name.toUpperCase()}`;
-    return c.html(fragmentHtml(rendered, data, stateKey));
+    return c.html(fragmentHtml(rendered, data, Component.stateKey));
   }
 
   function fragmentHtml(rendered, state = {}, stateKey) {

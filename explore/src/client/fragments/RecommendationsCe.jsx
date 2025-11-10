@@ -3,7 +3,7 @@ import Recommendations from "../../components/Recommendations";
 import { useEffect, useState, useRef } from "preact/hooks";
 import fetchData from "../../fetchData";
 
-const initialState = window.EXPLORE_RECOMMENDATIONS || {};
+const initialState = window[Recommendations.stateKey] || {};
 
 const RecommendationsCe = ({ skus }) => {
   const [state, setState] = useState(initialState);
