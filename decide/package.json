@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@hono/node-server": "^1.13.7",
-    "dotenv": "^16.4.7",
+    "dotenv": "^17.2.3",
     "hono": "^4.7.10",
     "preact": "^10.26.1",
     "preact-custom-element": "^4.3.0",
@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
-    "esbuild": "^0.25.10",
+    "esbuild": "^0.27.0",
     "esbuild-css-modules-plugin": "^3.1.5"
   }
 }

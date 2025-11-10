@@ -55,10 +55,7 @@ cd tractor-store-preact
 Install dependencies:
 
 ```bash
-# install root dependencies (local only)
 npm install
-# install dependencies in all projects
-npm run install:all
 ```
 
 Start the development server:

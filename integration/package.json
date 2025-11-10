@@ -11,8 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "dotenv": "^17.2.3",
+    "esbuild": "^0.27.0",
+    "express": "^5.1.0",
     "http-proxy-middleware": "^3.0.3",
     "nodesi": "^2.0.1"
   }

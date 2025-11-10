@@ -6,22 +6,27 @@
   "engines": {
     "node": ">=21.0.0"
   },
+  "workspaces": [
+    "integration",
+    "explore",
+    "decide",
+    "checkout"
+  ],
   "scripts": {
-    "start:integration": "npm --prefix integration start",
-    "start:explore": "npm --prefix explore start",
-    "start:decide": "npm --prefix decide start",
-    "start:checkout": "npm --prefix checkout start",
-    "build:explore": "npm --prefix explore run build",
-    "build:decide": "npm --prefix decide run build",
-    "build:checkout": "npm --prefix checkout run build",
-    "prod:integration": "npm --prefix integration run prod",
-    "prod:explore": "npm --prefix explore run prod",
-    "prod:decide": "npm --prefix decide run prod",
-    "prod:checkout": "npm --prefix checkout run prod",
+    "start:integration": "npm -w integration start",
+    "start:explore": "npm -w explore start",
+    "start:decide": "npm -w decide start",
+    "start:checkout": "npm -w checkout start",
+    "build:explore": "npm -w explore run build",
+    "build:decide": "npm -w decide run build",
+    "build:checkout": "npm -w checkout run build",
+    "prod:integration": "npm -w integration run prod",
+    "prod:explore": "npm -w explore run prod",
+    "prod:decide": "npm -w decide run prod",
+    "prod:checkout": "npm -w checkout run prod",
     "build": "npm run build:explore && npm run build:decide && npm run build:checkout",
     "start": "concurrently -c dim,red,green,yellow npm:start:*",
-    "prod": "concurrently -c dim,red,green,yellow npm:prod:*",
-    "install:all": "concurrently -m 1 'npm --prefix explore install' 'npm --prefix decide install' 'npm --prefix checkout install' 'npm --prefix integration install'"
+    "prod": "concurrently -c dim,red,green,yellow npm:prod:*"
   },
   "author": "neuland",
   "license": "ISC",
