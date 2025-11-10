@@ -12,7 +12,7 @@ COPY decide/package*.json ./decide/
 COPY checkout/package*.json ./checkout/
 COPY integration/package*.json ./integration/
 
-RUN npm install && npm run install:all
+RUN npm install
 
 COPY . .
 
